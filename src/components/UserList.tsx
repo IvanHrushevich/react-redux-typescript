@@ -1,17 +1,16 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { fetchUsers } from "../store/action-creators/user";
+import { useActions } from "../hooks/useActions";
 
 type Props = {};
 
 export default function UserList({}: Props) {
   const { users, isLoading, error } = useTypedSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const { fetchUsers } = useActions();
 
   useEffect(() => {
-    dispatch(fetchUsers() as any);
+    fetchUsers();
   }, []);
 
   if (isLoading) {
