@@ -11,11 +11,13 @@ function TodoList({}: Props) {
     (state: RootState) => state.todo
   );
 
-  const { fetchTodos } = useActions();
+  const { fetchTodos, setTodoPage } = useActions();
 
   useEffect(() => {
     fetchTodos(page, limit);
-  }, []);
+  }, [page, limit]);
+
+  const pages = [1, 2, 3, 4, 5];
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -32,6 +34,22 @@ function TodoList({}: Props) {
           {todo.id}: {todo.title}
         </div>
       ))}
+
+      <div style={{ display: "flex" }}>
+        {pages.map((p) => (
+          <div
+            style={{
+              border: p === page ? "2px solid green" : "1px solid gray",
+              padding: 10,
+              cursor: "pointer",
+            }}
+            onClick={() => setTodoPage(p)}
+            key={p}
+          >
+            {p}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -3,8 +3,8 @@ const initialState: TodoState = {
   todos: [],
   isLoading: false,
   error: null,
-  limit: 0,
-  page: 0,
+  limit: 10,
+  page: 1,
 };
 
 export const todoReducer = (
